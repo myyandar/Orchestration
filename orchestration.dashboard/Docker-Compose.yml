@@ -1,0 +1,10 @@
+services:
+  orchestration-dashboard:
+    build:
+      context: ./Orchestration.Dashboard
+      dockerfile: Dockerfile
+    container_name: orchestration-dashboard
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development

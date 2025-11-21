@@ -1,0 +1,41 @@
+services:
+  orchestration-api:
+    build:
+      context: ./Orchestration.API
+      dockerfile: Dockerfile
+    container_name: orchestration-api
+    ports:
+      - "5000:80"    # external:internal
+      - "5001:443"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=OrchestrationDb;User Id=sa;Password=Saabo2025!@#$%;TrustServerCertificate=True
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+
+  orchestration-dashboard:
+    build:
+      context: ./Orchestration.Dashboard
+      dockerfile: Dockerfile
+    container_name: orchestration-dashboard
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - orchestration-api
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Saabo2025!@#$%
+    healthcheck:
+      test: ["CMD-SHELL", "sqlcmd -S localhost -U sa -P Saabo2025!@#$% -Q 'SELECT 1'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5

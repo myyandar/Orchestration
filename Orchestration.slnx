@@ -1,13 +1,16 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="Docker-Compose.yml" />
+  </Folder>
   <Project Path="Orchestration.API/Orchestration.API.csproj" />
   <Project Path="Orchestration.AppHost/Orchestration.AppHost.csproj" />
   <Project Path="Orchestration.Core/Orchestration.Core.csproj" />
-  <Project Path="Orchestration.Dashboard/orchestration.dashboard.esproj">
+  <Project Path="orchestration.dashboard/orchestration.dashboard.esproj">
     <Build />
     <Deploy />
   </Project>
   <Project Path="Orchestration.Data/Orchestration.Data.csproj" />
   <Project Path="Orchestration.SDK/Orchestration.SDK.csproj" />
   <Project Path="Orchestration.ServiceDefaults/Orchestration.ServiceDefaults.csproj" />
-  <Project Path="Tests/Tests/Tests.csproj" />
+  <Project Path="Orchestration.Test/Orchestration.Test.csproj" />
 </Solution>

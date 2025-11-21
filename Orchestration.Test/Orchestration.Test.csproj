@@ -15,12 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="Xunit" />
+    <ProjectReference Include="..\Orchestration.Core\Orchestration.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="IntegrationTests\" />
-    <Folder Include="UnitTests\" />
+    <Using Include="Xunit" />
   </ItemGroup>
 
 </Project>

@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Orchestration.Data\Orchestration.Data.csproj" />
+  </ItemGroup>
+
 </Project>

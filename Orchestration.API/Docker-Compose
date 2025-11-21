@@ -1,0 +1,20 @@
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+# Copy csproj and restore dependencies
+COPY *.sln .
+COPY Orchestration.API/*.csproj Orchestration.API/
+COPY Orchestration.Data/*.csproj Orchestration.Data/
+COPY Orchestration.ServiceDefaults/*.csproj Orchestration.ServiceDefaults/
+RUN dotnet restore Orchestration.API/Orchestration.API.csproj
+
+# Copy everything else and build
+COPY . .
+WORKDIR /src/Orchestration.API
+RUN dotnet publish Orchestration.API.csproj -c Release -o /app/publish
+
+# Use the ASP.NET runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+WORKDIR /app
+COPY --from=build /app/publish .
+ENTRYPOINT ["dotnet", "Orchestration.API.dll"]
